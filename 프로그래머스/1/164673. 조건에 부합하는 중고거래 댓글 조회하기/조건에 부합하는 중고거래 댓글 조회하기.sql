@@ -1,5 +1,5 @@
-select b.TITLE, b.BOARD_ID, r.REPLY_ID, r.WRITER_ID, r.CONTENTS, date_format(r.CREATED_DATE, "%Y-%m-%d") as CREATED_DATE
+select b.title, b.board_id, r.reply_id, r.writer_id, r.contents, date_format(r.created_date, "%Y-%m-%d") as created_date
 from USED_GOODS_BOARD as b
-join USED_GOODS_REPLY as r on b.BOARD_ID = r.BOARD_ID
-where b.CREATED_DATE like '2022-10-%'
-order by r.CREATED_DATE asc, b.TITLE asc;
+join USED_GOODS_REPLY as r on b.board_id = r.board_id
+where date_format(b.created_date, "%Y-%m") = "2022-10"
+order by r.created_date, b.title;
