@@ -1,19 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, temp;
-deque<int> dq;
+int n;
+queue<int> q;
 int main() {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	cin.tie(nullptr);
 	cin >> n;
     for (int i = 1; i <= n; i++) {
-        dq.push_back(i);
+        q.push(i);
     }
-    while (dq.size() > 1) {
-        dq.pop_front();
-        int ft = dq.front();
-        dq.pop_front();
-        dq.push_back(ft);
+    while(true) {
+        if (q.size() == 1) break;
+        q.pop();
+        int tmp = q.front();
+        q.pop();
+        q.push(tmp);
     }
-    cout << dq.front() << "\n";
+    cout << q.front() << "\n";
 }
