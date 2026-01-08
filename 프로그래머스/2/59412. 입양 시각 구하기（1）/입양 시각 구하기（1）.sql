@@ -1,5 +1,5 @@
-select date_format(datetime, '%H') as hour, count(*) as count
+select hour(datetime) as hour, count(*) as count
 from animal_outs
-where date_format(datetime, '%H') between 9 and 19
+where hour(datetime) between 9 and 19
 group by hour
 order by hour;
