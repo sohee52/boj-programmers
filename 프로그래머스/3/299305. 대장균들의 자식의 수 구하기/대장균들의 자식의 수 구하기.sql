@@ -1,5 +1,5 @@
-select p.id, count(c.id) as child_count
-from ecoli_data as p
-left join ecoli_data as c on p.id = c.parent_id
-group by p.id
-order by p.id;
+select a.id, count(b.id) as child_count
+from ecoli_data as a
+left join ecoli_data as b on a.id = b.parent_id
+group by a.id
+order by a.id;
