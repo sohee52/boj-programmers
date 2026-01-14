@@ -1,5 +1,4 @@
-select distinct d.id, d.email, d.first_name, d.last_name
-from developers as d
-join skillcodes as s on s.code & d.skill_code > 0
-where s.name in ('Python', 'C#')
-order by d.id;
+select id, email, first_name, last_name
+from developers
+where (skill_code & (select code from skillcodes where name = 'Python') > 0) or (skill_code & (select code from skillcodes where name = 'C#') > 0)
+order by id;
