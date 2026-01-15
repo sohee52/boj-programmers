@@ -1,10 +1,11 @@
-SELECT
-    id,
-    CASE NTILE(4) OVER (ORDER BY size_of_colony DESC)
-        WHEN 1 THEN 'CRITICAL'
-        WHEN 2 THEN 'HIGH'
-        WHEN 3 THEN 'MEDIUM'
-        ELSE 'LOW'
-    END AS COLONY_NAME
-FROM ECOLI_DATA
-ORDER BY id;
+select id, case
+            when percent <= 0.25 then 'CRITICAL'
+            when percent <= 0.50 then 'HIGH'
+            when percent <= 0.75 then 'MEDIUM'
+            else 'LOW'
+            end as colony_name
+from (select
+            id,
+            percent_rank() over (order by size_of_colony desc) as percent
+        from ecoli_data) as ranked
+order by id;
