@@ -1,35 +1,18 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-int n, result;
-int arr[100001], d[100001], s[100001];
-
-int main(){
-	cin.tie(0);
-	cout.tie(0);
-	ios::sync_with_stdio(false);
-
+int n, a[100004], psum[100004];
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
 	cin >> n;
-	arr[0] = 0;
-	s[0] = 0;
-	result = -1000000000;
-	for (int i = 1; i <= n; i++) {
-		cin >> arr[i];
-	}
-
-	for (int i = 1; i <= n; i++) {
-		s[i] = s[i - 1] + arr[i];
-	}
-
-	d[0] = 1000;
-	for (int i = 1; i <= n; i++) {
-		d[i] = min(s[i - 1], d[i - 1]);
-	}
-
-	for (int i = 1; i <= n; i++) {
-		result = max(result, s[i] - d[i]);
-	}
-
-	cout << result;
-
-	return 0;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        psum[1] = a[1];
+        if (i >= 2) psum[i] = max(a[i], psum[i-1] + a[i]);
+    }
+    int mx = -1004;
+    for (int i = 1; i <= n; i++){
+        mx = max(psum[i], mx);
+    }
+    cout << mx << "\n";
 }
